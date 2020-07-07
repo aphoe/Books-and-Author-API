@@ -35,6 +35,6 @@ class JsonReturnFormat
             'status_code' => 422,
             'status' => 'error',
             'errors' => $errors->toArray(),
-        ], 42);
+        ], 422);
     }
 }
