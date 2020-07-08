@@ -1,79 +1,191 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Books and Author API
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+## About
+A laravel based backend for books and associated authors APIs. Searches for books from [Ice and Fire API](https://anapioficeandfire.com/Documentation#books).
 
-## About Laravel
+## System requirement
+1. PHP >= 7.2.5
+1. MySQL or SQLite
+1. Git
+1. Composer - [Installation guide](https://getcomposer.org/doc/00-intro.md)
+1. A Web server. Project was tested with apache 2.4
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+You can read up on other [requirements for Laravel 7](https://laravel.com/docs/7.x/installation#installing-laravel).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Tools
+- Postman: for testing API endpoints.
+- Terminal/command prompt.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
+> If you are using a web server, make sure you are running these commands in the root folder (or any of its sub folder) of your web server.
 
-## Learning Laravel
+To begin, run the following command to download the project using Git
+```
+git clone https://github.com/aphoe/Books-and-Author-API.git book_api
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Next, move into the new project’s folder and install all its dependencies
+```
+// Go into the new folder
+cd book_api
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+//install dependencies
+composer install 
+```
 
-## Laravel Sponsors
+Create the `.env` file from the `.env.example` file, using this terminal command
+```
+cp .env.example .env
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The next step is to generate the Laravel application key for the project
+```
+php artisan key:generate
+``` 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+You can now run the application by running `php artisan serve` and going to http://localhost:8000/. If you are using a web server, follow the steps peculiar to your web server.
 
-## Contributing
+Next step is setting up your database server.
+1. Create  a database using the MySQL tool you are familiar with. 
+1. Open `.env` and enter the name of your database in the `DB_DATABASE` field.
+1. Also **enter correct values** for the `DB_USERNAME` and `DB_PASSWORD` fields.
+1. Save the `.env` file.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+See section below, if you want to use SQLite
 
-## Code of Conduct
+Finally, run database migration using 
+```
+php artisan migrate
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Using SQLite
+You can use SQLite instead of MySQL. 
 
-## Security Vulnerabilities
+Follow the steps below to create and configure SQLite.
+1. Go to the `database` folder of the project.
+1. Create `test_api.sqlite` file.
+1. Open up `.env` in a text editor.
+1. Enter the **absolute path** to `test_api.sqlite` as the value for the `DB_DATABASE` field.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Endpoints
+> The code below uses `http://localhost` as the  URL of the project. If you didn't install the project in the root of your application, use the appropriate URL.
 
-## License
+#### GET `/api/external-books`
+Searches Ice and Fire API for a Book.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+**Parameters**<br>
+`name`: Name of the book eg. A Game of Thrones
+
+**Response**<br>
+Returns JSON with full result or JSON with empty `data` field if no result found.
+
+**Error**<br>
+- Returns 422 if `name` parameter is not set.
+- Returns 404 if the Ice and Fire host cannot be resolved.
+- Returns 400 if any other error occurs.
+
+A JSON data is returned, in each case, with appropriate error message.
+
+#### POST `/api/v1/books`
+Creates a Book and saves to local database.
+
+**Parameters**<br>
+`name`<br>
+`isbn`<br>
+`authors`<br>
+`country`<br>
+`number_of_pages`<br>
+`publisher`<br>
+`release_date`<br>
+
+The `authors` parameter allows for having more than one Author. To save more than one Author, separate authors with a pipe (`|`).<br> E.g. `George R. R. Martin|Jon Snow|Tyrion Lannister` indicates that there are three authors and saves each Author separately.
+
+**Response**<br>
+Returns JSON with newly created Book.
+
+**Error**<br>
+Returns 422 if any of the parameters are missing or does not conform with validation rules. The error that occurred is returned as a JSON  data.
+
+#### GET `/api/v1/books`
+Lists books in the local database. List can also be optionally filtered by name (string), country (string), publisher (string) and release date (year, integer).
+
+**Parameters**<br>
+All parameters are optional
+`name`<br>
+`country`<br>
+`publisher`<br>
+`release_date`<br>
+
+**Response**<br>
+Returns JSON with full result or with empty data if no result found.
+
+**Error**<br>
+Returns 422 if any parameter does not conform to validation rules.
+
+#### PATCH `/api/v1/books/:id`
+Update a Book with integer ID of `:id`
+
+**Parameters**<br>
+All parameters are optional. Send only the fields you want to update.
+
+`name`<br>
+`isbn`<br>
+`authors`<br>
+`country`<br>
+`number_of_pages`<br>
+`publisher`<br>
+`release_date`<br>
+
+**Response**<br>
+Returns JSON with newly updated Book.
+
+**Error**<br>
+Returns 422 if any parameter does not conform to validation rules.
+
+#### DELETE `/api/v1/books/:id`
+Deletes the Book with integer ID `:id` from the database
+
+**Response**<br>
+Returns JSON with information on the deleted Book.
+
+**Error**<br>
+Returns 404 if no Book with given is found in the database.
+
+
+## Testing
+### Configure for testing
+Before running tests, configure the following
+- Open `phpunit.xml`
+- Look for the following lines (should be around Line 28)
+```xml
+<server name="DB_CONNECTION" value="mysql"/>
+<server name="DB_DATABASE" value="..."/>
+```
+
+- Change the value of `DB_CONNECTION` to `sqlite` if you are using SQLite.
+- Change the value of `DB_DATABASE` to the name of your database, if using MySQL. Or to `:memory:`, if using SQLite.
+
+### Running test
+To run test, go to the terminal and run `composer test`. 
+
+If this doesn't work, see below section.
+
+#### Troubleshooting
+`composer test` might not work if you are working on a non-Windows system. In that case you can run `vendor/bin/phpunit` instead. 
+
+Replace `/` in `vendor/bin/phpunit` with the directory separator of your operating system.
+
+To make `composer test` work, open `composer.json` and change the directory separator for the `test` sub section of the `scripts` section.
+```json
+"scripts": {
+
+        ...
+
+        "test": [
+            "vendor\\bin\\phpunit"
+        ]
+
+        ...
+
+    }
+```
