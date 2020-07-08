@@ -176,7 +176,7 @@ If this doesn't work, see below section.
 Replace `/` in `vendor/bin/phpunit` with the directory separator of your operating system.
 
 To make `composer test` work, open `composer.json` and change the directory separator for the `test` sub section of the `scripts` section.
-```json
+```
 "scripts": {
 
         ...,
