@@ -237,6 +237,6 @@ class BooksController extends Controller
             'status' => 'success',
             'message' => 'The book ' . $name . ' was deleted successfully.',
             'data' => [],
-        ], 204);
+        ]);
     }
 }
