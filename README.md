@@ -179,13 +179,13 @@ To make `composer test` work, open `composer.json` and change the directory sepa
 ```json
 "scripts": {
 
-        ...
+        ...,
 
         "test": [
             "vendor\\bin\\phpunit"
-        ]
+        ],
 
-        ...
+        ...,
 
     }
 ```
