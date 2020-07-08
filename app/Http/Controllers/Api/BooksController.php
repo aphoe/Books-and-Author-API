@@ -82,7 +82,7 @@ class BooksController extends Controller
         //Create validation rules
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'isbn' => 'required|string|unique:books,isbn|max:255',
+            'isbn' => 'required|string|max:255',
             'authors' => 'required|string|max:255',
             'publisher' => 'required|string|max:255',
             'country' => 'required|string|max:255',
@@ -159,7 +159,7 @@ class BooksController extends Controller
         //Create validation rules
         $validation = Validator::make($request->all(), [
             'name' => 'nullable|string|max:255',
-            'isbn' => 'nullable|string|max:255|unique:books,isbn,' . $id,
+            'isbn' => 'nullable|string|max:255',
             'authors' => 'nullable|string|max:255',
             'publisher' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
